@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ottenere IP</title>
+</head>
+<body>
+    <p id="dammi_ip">IP</p>
+</body>
+</html>
+
+<script>
+
+    // Funzione per ottenere l'indirizzo IP del client
+function getIPAddress(callback) {
+    // Richiesta al servizio di geolocalizzazione basato su IP
+    fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+            // Estrai l'indirizzo IP dalla risposta
+            const ipAddress = data.ip;
+            // Esegui la funzione di callback con l'indirizzo IP
+            callback(ipAddress);
+        })
+        .catch(error => {
+            console.error('Errore durante la richiesta IP:', error);
+            // Se c'è un errore, esegui la funzione di callback con un valore nullo
+            callback(null);
+        });
+}
+
+// Utilizzo della funzione per ottenere e stampare l'indirizzo IP
+getIPAddress(function(ipAddress) {
+    if (ipAddress) {
+        console.log('Indirizzo IP del client:', ipAddress);
+
+        var myParagraph = document.getElementById("dammi_ip");
+
+        // Assegna un nuovo testo all'elemento <p>
+        myParagraph.textContent = "Indirizzo IP: " , ipAddress ;
+
+    } else {
+        console.log('Impossibile ottenere l\'indirizzo IP del client.');
+    }
+});
+
+</script>
