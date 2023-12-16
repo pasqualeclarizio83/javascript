@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ad una certa ora pianifica</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+
+function apriPaginaWeb(url) {
+  window.open(url, '_blank'); // Apre il sito web in una nuova finestra o scheda
+}
+
+function pianificaAperturaPaginaWeb(oraDesiderata, minutiDesiderati, secondiDesiderati, url) {
+  const intervalID = setInterval(function() {
+    const adesso = new Date();
+    const oraAttuale = adesso.getHours();
+    const minutiAttuali = adesso.getMinutes();
+    const secondiAttuali = adesso.getSeconds();
+
+    if (
+      oraAttuale === oraDesiderata &&
+      minutiAttuali === minutiDesiderati &&
+      secondiAttuali === secondiDesiderati
+    ) {
+      apriPaginaWeb(url);
+      clearInterval(intervalID); // Interrompe l'intervallo dopo l'apertura della pagina web
+    }
+  }, 1000); // Controlla ogni secondo (1000 millisecondi)
+}
+
+// Esempio di utilizzo
+const oraDesiderata = 15; // Ore in formato 24 ore (ad esempio, 18 rappresenta le 6 di sera)
+const minutiDesiderati = 33;
+const secondiDesiderati = 0;
+const paginaWebDaAprire = 'https://www.example.com';
+
+window.onload = function() {
+
+    pianificaAperturaPaginaWeb(oraDesiderata, minutiDesiderati, secondiDesiderati, paginaWebDaAprire);
+};
+
+
+</script>
