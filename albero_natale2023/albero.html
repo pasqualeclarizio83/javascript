@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #001f3f;
+      margin: 0;
+    }
+
+    .tree {
+      position: relative;
+      width: 0;
+      height: 0;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-bottom: 100px solid #008000;
+    }
+
+    .trunk {
+      width: 20px;
+      height: 50px;
+      background-color: #8B4513;
+      position: absolute;
+      left: 40px;
+      top: 100px;
+    }
+
+    .star {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 25px solid #FFD700;
+      top: 50px;
+      left: 15px;
+    }
+
+    .light {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #ffec80;
+      border-radius: 50%;
+      animation: blink 1s infinite alternate;
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0.5;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="tree">
+  <div class="star"></div>
+  <div class="light" style="top: 70px; left: 20px;"></div>
+  <div class="light" style="top: 80px; left: 30px;"></div>
+  <div class="light" style="top: 90px; left: 25px;"></div>
+  <div class="trunk"></div>
+</div>
+
+</body>
+</html>
