@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categorie e Sottocategorie</title>
+  <style>
+    ul {
+      list-style-type: none;
+    }
+
+    .subcategory {
+      display: none;
+      margin-left: 20px;
+    }
+
+    .category:hover .subcategory {
+      display: block;
+    }
+
+    button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Categorie e Sottocategorie</h1>
+
+<ul id="categoriesTree">
+  <!-- Inizializza con una categoria di esempio -->
+  <li class="category" data-name="Categoria 1">Categoria 1</li>
+</ul>
+
+<button onclick="aggiungiCategoria()">Aggiungi Categoria</button>
+
+<script>
+  document.getElementById('categoriesTree').addEventListener('click', function (event) {
+    if (event.target.classList.contains('category')) {
+      aggiungiSottocategoria(event.target);
+    }
+  });
+
+  function aggiungiSottocategoria(category) {
+    const nomeSottocategoria = prompt('Inserisci il nome della sottocategoria:');
+    if (nomeSottocategoria !== null) {
+      const newSubcategory = document.createElement('li');
+      newSubcategory.classList.add('subcategory');
+      newSubcategory.textContent = nomeSottocategoria;
+
+      category.appendChild(newSubcategory);
+    }
+  }
+
+  function aggiungiCategoria() {
+    const nomeCategoria = prompt('Inserisci il nome della categoria:');
+    if (nomeCategoria !== null) {
+      const nuovaCategoria = document.createElement('li');
+      nuovaCategoria.classList.add('category');
+      nuovaCategoria.textContent = nomeCategoria;
+
+      const categoriaMadre = scegliCategoriaMadre();
+      if (categoriaMadre) {
+        const subcategoriesList = categoriaMadre.querySelector('.subcategory');
+        if (!subcategoriesList) {
+          const newList = document.createElement('ul');
+          newList.classList.add('subcategory');
+          categoriaMadre.appendChild(newList);
+        }
+        categoriaMadre.querySelector('.subcategory').appendChild(nuovaCategoria);
+      } else {
+        document.getElementById('categoriesTree').appendChild(nuovaCategoria);
+      }
+    }
+  }
+
+  function scegliCategoriaMadre() {
+    const categories = document.querySelectorAll('.category');
+    const options = ['Nessuna (categoria principale)', ...Array.from(categories).map(c => c.textContent)];
+    const scelta = prompt('Seleziona la categoria madre:\n' + options.join('\n'));
+
+    if (scelta && scelta !== 'Nessuna (categoria principale)') {
+      return Array.from(categories).find(c => c.textContent === scelta);
+    }
+
+    return null;
+  }
+</script>
+
+</body>
+</html>

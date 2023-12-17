@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual DOM Example</title>
+</head>
+<body>
+
+  <div id="app"></div>
+
+  <script>
+    // Funzione per creare un elemento virtuale
+    function createElement(tag, props, children) {
+      const element = document.createElement(tag);
+
+      // Aggiungi le proprietà all'elemento virtuale
+      for (let prop in props) {
+        if (props.hasOwnProperty(prop)) {
+          element[prop] = props[prop];
+        }
+      }
+
+      // Aggiungi i figli all'elemento virtuale
+      if (children) {
+        children.forEach(child => {
+          if (typeof child === 'string') {
+            element.appendChild(document.createTextNode(child));
+          } else {
+            element.appendChild(child);
+          }
+        });
+      }
+
+      return element;
+    }
+
+    // Funzione per rendere un elemento virtuale nel DOM
+    function render(element, container) {
+      // Pulisci il contenitore
+      container.innerHTML = '';
+      // Aggiungi l'elemento virtuale al DOM
+      container.appendChild(element);
+    }
+
+    // Stato iniziale
+    const state = {
+      counter: 0
+    };
+
+    // Funzione per aggiornare l'applicazione
+    function update() {
+      // Incrementa il contatore nello stato
+      state.counter++;
+
+      // Crea un nuovo elemento virtuale con il nuovo stato
+      const newElement = createElement('div', { id: 'app' }, [
+        createElement('h1', {}, [`Counter: ${state.counter}`]),
+        createElement('button', { onclick: update }, ['Incrementa'])
+      ]);
+
+      // Rendi l'elemento virtuale nel DOM
+      render(newElement, document.getElementById('app'));
+    }
+
+    // Inizializza l'applicazione
+    const initialElement = createElement('div', { id: 'app' }, [
+      createElement('h1', {}, ['Counter: 0']),
+      createElement('button', { onclick: update }, ['Incrementa'])
+    ]);
+
+    // Rendi l'elemento virtuale nel DOM inizialmente
+    render(initialElement, document.body);
+  </script>
+
+</body>
+</html>
