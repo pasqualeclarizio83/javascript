@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caffetteria</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    #order-summary {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Benvenuti nella Caffetteria</h1>
+
+  <label for="bevande">Seleziona una Bevanda:</label>
+  <select id="bevande" onchange="popolaTipiCaffe()">
+    <option value="caffe">Caffè</option>
+    <option value="cappuccino">Cappuccino</option>
+    <option value="latte">Latte</option>
+  </select>
+
+  <label for="tipi-caffe">Scegli il Tipo di Caffè:</label>
+  <select id="tipi-caffe"></select>
+
+  <button onclick="mostraOrdine()">Ordina</button>
+
+  <div id="order-summary">
+    <h2>Riepilogo Ordine:</h2>
+    <p>Bevanda: <span id="selected-beverage"></span></p>
+    <p>Tipo di Caffè: <span id="selected-coffee-type"></span></p>
+  </div>
+
+  <script>
+    const tipiCaffe = {
+      caffe: ['Espresso', 'Macchiato', 'Americano'],
+      cappuccino: ['Classico', 'Vaniglia', 'Cioccolato'],
+      latte: ['Caldo', 'Freddo', 'Macchiato']
+    };
+
+    function popolaTipiCaffe() {
+      const selectedBeverage = document.getElementById('bevande').value;
+      const tipiCaffeMenu = document.getElementById('tipi-caffe');
+
+      // Rimuovi tutte le opzioni attuali
+      tipiCaffeMenu.innerHTML = '';
+
+      // Aggiungi le tipologie di caffè per la bevanda selezionata
+      tipiCaffe[selectedBeverage].forEach(tipo => {
+        const option = document.createElement('option');
+        option.value = tipo;
+        option.text = tipo;
+        tipiCaffeMenu.appendChild(option);
+      });
+    }
+
+    function mostraOrdine() {
+      const selectedBeverage = document.getElementById('bevande').value;
+      const selectedCoffeeType = document.getElementById('tipi-caffe').value;
+
+      // Aggiorna il riepilogo dell'ordine
+      document.getElementById('selected-beverage').textContent = selectedBeverage;
+      document.getElementById('selected-coffee-type').textContent = selectedCoffeeType;
+
+      // Mostra il riepilogo dell'ordine
+      document.getElementById('order-summary').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>

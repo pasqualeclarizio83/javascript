@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regioni e Città</title>
+</head>
+<body>
+
+  <label for="regioni">Seleziona Regione:</label>
+  <select id="regioni" onchange="popolaCitta()">
+    <option value="nord">Nord</option>
+    <option value="centro">Centro</option>
+    <option value="sud">Sud</option>
+  </select>
+
+  <label for="citta">Seleziona Città:</label>
+  <select id="citta">
+    <!-- Il secondo menu verrà popolato dinamicamente -->
+  </select>
+
+  <script>
+    // Mappa regioni alle rispettive città
+    const cittaPerRegione = {
+      nord: ['Milano', 'Torino', 'Genova'],
+      centro: ['Roma', 'Firenze', 'Bologna'],
+      sud: ['Napoli', 'Palermo', 'Bari']
+    };
+
+    // Funzione per popolare il menu delle città in base alla regione selezionata
+    function popolaCitta() {
+      const regioneSelezionata = document.getElementById('regioni').value;
+      const cittaMenu = document.getElementById('citta');
+
+      // Rimuovi tutte le opzioni attuali
+      cittaMenu.innerHTML = '';
+
+      // Aggiungi le città della regione selezionata al menu
+      cittaPerRegione[regioneSelezionata].forEach(citta => {
+        const option = document.createElement('option');
+        option.value = citta;
+        option.text = citta;
+        cittaMenu.appendChild(option);
+      });
+    }
+
+    // Chiama la funzione popolaCitta all'inizio per inizializzare il secondo menu
+    popolaCitta();
+  </script>
+
+</body>
+</html>
