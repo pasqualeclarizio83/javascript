@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PizzaApp API</title>
+</head>
+<body>
+  <h1>Dettagli delle Pizze</h1>
+  <div id="pizzaDetails"></div>
+
+  <script>
+    // Definisci l'URL dell'API
+    const apiUrl = 'https://private-anon-75dbbeec02-pizzaapp.apiary-mock.com/restaurants/';
+
+    // Effettua la richiesta utilizzando la funzione fetch
+    fetch(apiUrl)
+      .then(response => {
+        // Controlla se la risposta ha successo (status code tra 200 e 299)
+        if (!response.ok) {
+          throw new Error(`Errore HTTP! Codice: ${response.status}`);
+        }
+        // Converte la risposta in formato JSON
+        return response.json();
+      })
+      .then(data => {
+        // Gestisci i dati ricevuti dall'API
+        const pizzaDetailsElement = document.getElementById('pizzaDetails');
+        
+        // Crea un paragrafo per ogni pizza con indice e specifiche
+        data.forEach((pizza, index) => {
+          const paragraph = document.createElement('p');
+          paragraph.innerHTML = `<strong>${index + 1}. ${pizza.name}</strong><br>Indirizzo: ${pizza.address1}<br>Indirizzo2: ${pizza.address2}<br>Latitudine: ${pizza.latitude}<br>Longitudine: ${pizza.longitude}`;
+          pizzaDetailsElement.appendChild(paragraph);
+        });
+      })
+      .catch(error => {
+        // Gestisci gli errori durante la richiesta
+        console.error('Errore durante la richiesta:', error.message);
+      });
+  </script>
+</body>
+</html>

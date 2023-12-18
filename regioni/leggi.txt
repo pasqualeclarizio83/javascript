@@ -1,0 +1,6 @@
+avendo un API con le seguenti chiavi: nome, sigla, regione. Attraverso API proietta i dati su una pagina web, con il campo di ricerca e il pulsante per la ricerca in base al nome della città
+
+
+
+Avendo un API di un Json composto dalle seguenti chiavi: nome, sigla, regione.
+Estrapolare dell'API i dati sulla pagina web, con il campo di ricerca e il pulsante in base al nome della città

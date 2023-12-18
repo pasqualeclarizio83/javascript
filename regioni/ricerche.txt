@@ -1,0 +1,10 @@
+Javascript in base all'API invocata, suddivisa in nome, cap, provincia: regione
+creare la pagina web con il tasto ricerca e il campo per effettuare la ricerca in javascript
+dettagli all'interno della pagina. Aggiungi all'url dell'API anche il campo di testo in javascript
+
+
+
+Javascript in base all'API invocata, suddivisa in nome, cap, provincia: regione.
+Creare la pagina web con il tasto di ricerca che invoca l'API con la ricerca della Regione in
+base al campo di testo.
+I dettagli all'interno della pagina.

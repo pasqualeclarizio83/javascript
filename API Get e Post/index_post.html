@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leggi e Invia POST</title>
+</head>
+<body>
+  <h1>Ultimi POST</h1>
+  <button onclick="leggiUltimiPost()">Leggi Ultimi POST</button>
+
+  <div id="ultimiPosts"></div>
+
+  <h2>Invia Nuovo POST</h2>
+  <label for="title">Titolo:</label>
+  <input type="text" id="title" placeholder="Inserisci il titolo">
+
+  <label for="body">Testo:</label>
+  <textarea id="body" placeholder="Inserisci il testo"></textarea>
+
+  <button onclick="inviaNuovoPost()">Invia Nuovo POST</button>
+
+  <script>
+    function leggiUltimiPost() {
+      const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+
+      fetch(apiUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Errore HTTP! Stato: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(posts => {
+          mostraUltimiPost(posts);
+        })
+        .catch(error => {
+          console.error('Errore:', error.message);
+        });
+    }
+
+    function mostraUltimiPost(posts) {
+      const ultimiPostsDiv = document.getElementById('ultimiPosts');
+      ultimiPostsDiv.innerHTML = '<h3>Ultimi POST:</h3>';
+
+      posts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.innerHTML = `
+          <h4>${post.title}</h4>
+          <p>${post.body}</p>
+          <hr>
+        `;
+        ultimiPostsDiv.appendChild(postElement);
+      });
+    }
+
+    function inviaNuovoPost() {
+      const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+
+      const title = document.getElementById('title').value;
+      const body = document.getElementById('body').value;
+
+      if (!title || !body) {
+        alert("Inserisci il titolo e il testo del nuovo post");
+        return;
+      }
+
+      const nuovoPost = {
+        title: title,
+        body: body,
+        userId: 90, // L'ID dell'utente può essere personalizzato
+      };
+
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(nuovoPost),
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Errore HTTP! Stato: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Nuovo POST inviato. Risposta:', data);
+        leggiUltimiPost(); // Aggiorna la lista dei post dopo l'invio del nuovo post
+      })
+      .catch(error => {
+        console.error('Errore durante l\'invio del POST:', error.message);
+      });
+    }
+  </script>
+</body>
+</html>
+

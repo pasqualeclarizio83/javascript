@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ricerca Comuni in una Regione</title>
+  <style>
+    /* Stile CSS opzionale per la presentazione */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    input {
+      padding: 5px;
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ricerca Regione</h1>
+  <label for="searchInput">Ricerca per Regione:</label>
+  <input type="text" id="searchInput" placeholder="Inserisci il nome della regione">
+  <button onclick="searchUsers()">Cerca </button>
+
+  <ul id="userResults"></ul>
+
+  <script>
+    function searchUsers() {
+      const username = document.getElementById('searchInput').value.trim();
+
+      // Verifica se il campo di ricerca è vuoto
+      if (!username) {
+        alert("Inserisci il nome utente");
+        return;
+      }
+
+      // Directory parametrizzata nell'URL
+      const directoryParam = 'puglia';
+      
+      // URL dell'API con directory parametrizzata
+      // const apiUrl = `https://api.example.com/data/${directoryParam}?username=${username}`;
+
+	const apiUrl = `https://axqvoqvbfjpaamphztgd.functions.supabase.co/comuni/${username}`;
+
+      // Effettua la richiesta utilizzando la funzione fetch
+      fetch(apiUrl)
+        .then(response => {
+          // Controlla se la risposta ha successo (status code tra 200 e 299)
+          if (!response.ok) {
+            throw new Error(`Errore HTTP! Codice: ${response.status}`);
+          }
+          // Converte la risposta in formato JSON
+          return response.json();
+        })
+        .then(data => {
+          // Visualizza i risultati nella pagina
+          displayResults(data);
+        })
+        .catch(error => {
+          // Gestisci gli errori durante la richiesta
+          console.error('Errore durante la richiesta:', error.message);
+	//
+	  
+	  const userResults = document.getElementById('userResults');
+          userResults.innerHTML = error.message;
+		
+        });
+    }
+
+    function displayResults(users) {
+      const userResults = document.getElementById('userResults');
+      userResults.innerHTML = '';
+
+      // Mostra i risultati nella pagina
+      users.forEach(user => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `<strong>${user.codice}</strong><br>
+                              Nome del Comune: ${user.nome}<br>
+                              Cap: ${user.cap}`;
+        userResults.appendChild(listItem);
+      });
+    }
+  </script>
+</body>
+</html>
+

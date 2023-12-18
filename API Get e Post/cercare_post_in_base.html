@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cerca Post per Testo</title>
+</head>
+<body>
+  <h1>Cerca Post per Testo</h1>
+  <label for="searchText">Testo di Ricerca:</label>
+  <input type="text" id="searchText" placeholder="Inserisci il testo di ricerca">
+  <button onclick="cercaPost()">Cerca Post</button>
+
+  <div id="risultatiRicerca"></div>
+
+  <script>
+    function cercaPost() {
+      const searchText = document.getElementById('searchText').value.trim();
+
+      if (!searchText) {
+        alert("Inserisci il testo di ricerca");
+        return;
+      }
+
+      const apiUrl = `https://jsonplaceholder.typicode.com/posts?q=${encodeURIComponent(searchText)}`;
+
+      fetch(apiUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Errore HTTP! Stato: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(posts => {
+          mostraRisultatiRicerca(posts);
+        })
+        .catch(error => {
+          console.error('Errore durante la ricerca:', error.message);
+        });
+    }
+
+    function mostraRisultatiRicerca(posts) {
+      const risultatiRicercaDiv = document.getElementById('risultatiRicerca');
+      risultatiRicercaDiv.innerHTML = '';
+
+      if (posts.length === 0) {
+        risultatiRicercaDiv.innerHTML = '<p>Nessun risultato trovato.</p>';
+        return;
+      }
+
+      risultatiRicercaDiv.innerHTML = '<h3>Risultati della Ricerca:</h3>';
+
+      posts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.innerHTML = `
+          <h4>${post.title}</h4>
+          <p>${post.body}</p>
+          <hr>
+        `;
+        risultatiRicercaDiv.appendChild(postElement);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<html>
+<head>
+<body>
+</body>
+</head>
+</html>
+
+
+<script>
+
+// Definisci l'URL dell'API
+const apiUrl = 'https://private-anon-75dbbeec02-pizzaapp.apiary-mock.com/restaurants/';
+
+// Opzioni per la richiesta HTTP
+const options = {
+  method: 'GET', // Puoi cambiare il metodo a 'POST', 'PUT', ecc. a seconda delle tue esigenze
+  headers: {
+    'Content-Type': 'application/json', // Specifica il tipo di contenuto se necessario
+    // Altre intestazioni possono essere aggiunte qui
+  },
+  // Alcuni API richiedono un corpo della richiesta (payload), puoi aggiungerlo qui
+  // body: JSON.stringify({ key: 'value' }),
+};
+
+
+fetch(apiUrl, options)
+  .then(response => {
+    // Controlla se la risposta ha successo (status code tra 200 e 299)
+    if (!response.ok) {
+      throw new Error(`Errore HTTP! Codice: ${response.status}`);
+    }
+    // Converte la risposta in formato JSON
+    return response.json();
+  })
+  .then(data => {
+    // Gestisci i dati ricevuti dall'API
+    console.log('Dati ricevuti:', data);
+  })
+  .catch(error => {
+    // Gestisci gli errori durante la richiesta
+    console.error('Errore durante la richiesta:', error.message);
+  });
+
+</script>
