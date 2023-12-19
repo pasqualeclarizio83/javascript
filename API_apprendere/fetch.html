@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Data on Web Page</title>
+</head>
+<body>
+
+  <h1>Dati dall'API</h1>
+  <ul id="apiDataList"></ul>
+
+  <script>
+    // URL dell'API
+    const apiUrl = 'https://api.restful-api.dev/objects';
+
+    // Elemento DOM in cui verranno inseriti i dati
+    const dataList = document.getElementById('apiDataList');
+
+    // Effettua una richiesta GET all'API
+    fetch(apiUrl)
+      .then(response => {
+        // Verifica se la risposta è OK (status code 200-299)
+        if (!response.ok) {
+          throw new Error(`Errore nella richiesta: ${response.status}`);
+        }
+
+        // Parse della risposta JSON
+        return response.json();
+      })
+      .then(data => {
+        // Manipola il DOM per inserire i dati nella pagina
+        data.forEach(item => {
+          const listItem = document.createElement('li');
+          listItem.textContent = item.name; // Supponendo che ci sia una proprietà 'name' nei dati
+          dataList.appendChild(listItem);
+        });
+      })
+      .catch(error => {
+        // Gestisci eventuali errori durante la richiesta
+        console.error('Errore durante la richiesta:', error);
+      });
+  </script>
+
+</body>
+</html>

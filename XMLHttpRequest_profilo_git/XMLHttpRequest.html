@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Profile</title>
+</head>
+<body>
+
+  <h1>Il mio profilo GitHub</h1>
+  <div id="profileData"></div>
+
+  <script>
+    // Nome utente GitHub
+    // const githubUsername = 'YOUR_GITHUB_USERNAME';
+
+    // URL dell'API GitHub
+    // const apiUrl = `https://api.github.com/users/${githubUsername}`;
+
+    const apiUrl = `https://api.github.com/users/pasqualeclarizio83`;
+
+    // Elemento DOM in cui verranno inseriti i dati del profilo
+    const profileDataContainer = document.getElementById('profileData');
+
+    // Crea una nuova istanza di XMLHttpRequest
+    const xhr = new XMLHttpRequest();
+
+    // Configura la richiesta
+    xhr.open('GET', apiUrl, true);
+
+    // Gestisce l'evento di caricamento della risposta
+    xhr.onload = function () {
+      // Verifica se la richiesta ha avuto successo (status code 200)
+      if (xhr.status === 200) {
+        // Parse della risposta JSON
+        const profileData = JSON.parse(xhr.responseText);
+
+        // Manipola il DOM per inserire i dati nella pagina
+        const profileHTML = `
+          <p><strong>Nome utente:</strong> ${profileData.login}</p>
+          <p><strong>Nome:</strong> ${profileData.name}</p>
+          <p><strong>Bio:</strong> ${profileData.bio}</p>
+          <p><strong>Numero di repository pubblici:</strong> ${profileData.public_repos}</p>
+          <p><strong>Followers:</strong> ${profileData.followers}</p>
+        `;
+
+        profileDataContainer.innerHTML = profileHTML;
+      } else {
+        // Gestisci eventuali errori durante la richiesta
+        console.error('Errore durante la richiesta:', xhr.status, xhr.statusText);
+      }
+    };
+
+    // Gestisce l'evento di errore della richiesta
+    xhr.onerror = function () {
+      console.error('Errore di rete durante la richiesta');
+    };
+
+    // Invia la richiesta
+    xhr.send();
+  </script>
+
+</body>
+</html>
+

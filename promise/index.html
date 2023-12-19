@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popolamento Pagina Web con Promise e API</title>
+</head>
+<body>
+
+  <h1>Dati dall'API</h1>
+  <ul id="apiDataList"></ul>
+
+  <script>
+    // Funzione che restituisce una promessa per una chiamata API
+    function fetchData(apiUrl) {
+      return new Promise((resolve, reject) => {
+        // Chiamata fetch per ottenere i dati dall'API
+        fetch(apiUrl)
+          .then(response => {
+            // Verifica se la risposta è OK (status code 200-299)
+            if (!response.ok) {
+              throw new Error(`Errore nella richiesta: ${response.status}`);
+            }
+
+            // Parse della risposta JSON e risoluzione della promessa
+            return response.json();
+          })
+          .then(data => {
+            resolve(data); // Risoluzione della promessa con i dati ottenuti
+          })
+          .catch(error => {
+            reject(error); // Rifiuto della promessa in caso di errore
+          });
+      });
+    }
+
+    // URL dell'API
+    const apiUrl = 'https://api.restful-api.dev/objects';
+
+    // Elemento DOM in cui verranno inseriti i dati ottenuti dall'API
+    const dataList = document.getElementById('apiDataList');
+
+    // Utilizzo della promessa per invocare un'API e popolare la pagina web
+    fetchData(apiUrl)
+      .then(data => {
+        // I dati sono stati ottenuti con successo
+        data.forEach(item => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `ID: ${item.id}, Nome: ${item.name}`;
+          dataList.appendChild(listItem);
+        });
+      })
+      .catch(error => {
+        // Si è verificato un errore durante l'invocazione dell'API
+        console.error('Errore durante l\'invocazione dell\'API:', error.message);
+      });
+  </script>
+
+</body>
+</html>

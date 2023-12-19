@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crea Oggetto con API POST</title>
+</head>
+<body>
+
+  <h1>Crea Oggetto</h1>
+  <form id="createForm">
+    <label for="name">Nome dell'oggetto:</label>
+    <input type="text" id="name" name="name" required>
+    
+    <button type="submit">Crea Oggetto</button>
+  </form>
+
+  <h2>Dati dall'API</h2>
+  <ul id="apiDataList"></ul>
+
+  <script>
+    // Elementi DOM
+    const createForm = document.getElementById('createForm');
+    const nameInput = document.getElementById('name');
+    const dataList = document.getElementById('apiDataList');
+
+    // URL dell'API
+    const apiUrl = 'https://api.restful-api.dev/objects';
+
+    // Gestione dell'invio del modulo
+    createForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const objectData = {
+        name: nameInput.value,
+      };
+
+      // Utilizzo della fetch API per creare un oggetto tramite una richiesta POST
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(objectData),
+      })
+        .then(response => {
+          // Verifica se la risposta è OK (status code 200-299)
+          if (!response.ok) {
+            throw new Error(`Errore nella richiesta: ${response.status}`);
+          }
+
+          // Parse della risposta JSON e aggiunta dei dati alla pagina
+          return response.json();
+        })
+        .then(data => {
+          // I dati sono stati ottenuti con successo
+          const listItem = document.createElement('li');
+          listItem.textContent = `ID: ${data.id}, Nome: ${data.name}`;
+          dataList.appendChild(listItem);
+        })
+        .catch(error => {
+          // Si è verificato un errore durante l'invocazione dell'API
+          console.error('Errore durante l\'invocazione dell\'API:', error.message);
+        });
+    });
+  </script>
+
+</body>
+</html>
