@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Javascript test</title>
+</head>
+<body>
+     
+</body>
+</html>
+
+
+<script>
+
+	// Verifica se il browser è Firefox
+	var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+
+	// Verifica se il browser è Chrome
+	var isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+
+	// Esempio di gestione in base al browser
+	if (isFirefox) {
+    		console.log('Stai utilizzando Firefox!');
+
+
+		// Sto utilizzando Firefox quindi progetto qui all'interno
+
+
+		let domanda = confirm("La domanda che ti viene di fare ?");
+
+		// se viene premuto OK
+		alert( domanda );
+
+
+
+
+
+
+	} else if (isChrome) {
+    		console.log('Stai utilizzando Chrome!');
+    		// Altri codici specifici per Chrome
+	} else {
+    		console.log('Browser non supportato.');
+    		// Gestione per altri browser o situazioni
+	}
+
+
+
+	// Verifica se il browser è Internet Explorer
+	function isInternetExplorer() {
+  		// Utilizza la proprietà 'ActiveXObject' che è specifica di Internet Explorer
+  		return 'ActiveXObject' in window;
+	}
+
+	// Esempio di utilizzo
+	if (isInternetExplorer()) {
+  		// Codice da eseguire se il browser è Internet Explorer
+		// in base al browser
+		let test = prompt("Test");
+  		console.log ("stai utilizzando Internet Explorer ");
+	} else {
+  		// Codice da eseguire per altri browser
+  		console.log ("non stai utilizzando Internet Explorer ");
+	}
+	
+</script>
