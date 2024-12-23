@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imparare JavaScript</title>
+</head>
+<body>
+
+    <h1>Un esempio</h1>
+    <p id="myText">Premi il pulsante per cambiare questo testo.</p>
+    <button id="myButton">Clicca qui</button>
+
+    <script>
+        // Trova gli elementi nel documento
+        const button = document.getElementById("myButton");
+        const text = document.getElementById("myText");
+
+        // Aggiungi un evento al pulsante
+        button.addEventListener("click", () => {
+            text.innerText = "Hai cambiato il testo! 🎉";
+        });
+    </script>
+
+</body>
+</html>

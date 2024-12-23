@@ -90,3 +90,54 @@ button.addEventListener("click", () => {
     text.innerText = "Hai cambiato il testo! 🎉";
 }
 ```
+
+#### Se fin qui forse non è chiaro. Lo capiremo meglio, in seguito
+
+### JavaScript Basi complete - From A to Z
+
+#### HTML con JAVASCRIPT. E' importante nel Body, inserire <script> </script>
+
+```python
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+</head>
+<body>
+    <h1>Guarda la console!</h1>
+
+    <!-- Collega il file JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
+```
+
+#### è importante capire il file "script.js"
+#### il file HTML e il file Javascript devono essere collocate nella stessa directory
+
+```python
+// Scrive "Hello World" nella console del browser
+console.log("Hello World");
+```
+
+#### Nello stesso file, come già descritto e accennato
+
+```python
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+</head>
+<body>
+	console.log("Ciao Mondo");
+</body>
+</html>
+```
+
+[Esempio 2](https://github.com/pasqualeclarizio83/django/blob/main/start.png)
