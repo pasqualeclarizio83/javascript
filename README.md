@@ -97,6 +97,8 @@ button.addEventListener("click", () => {
 
 #### HTML con JAVASCRIPT. E' importante nel Body, inserire <script> </script>
 
+#### Nell'esempio sottostante <script src="script.js"><script>
+
 ```python
 <!DOCTYPE html>
 <html lang="en">
@@ -115,6 +117,8 @@ button.addEventListener("click", () => {
 </html>
 ```
 
+[Esempio](https://github.com/pasqualeclarizio83/javascript/blob/master/esempio.html)
+
 #### è importante capire il file "script.js"
 #### il file HTML e il file Javascript devono essere collocate nella stessa directory
 
@@ -122,6 +126,8 @@ button.addEventListener("click", () => {
 // Scrive "Hello World" nella console del browser
 console.log("Hello World");
 ```
+
+[Script JS](https://github.com/pasqualeclarizio83/javascript/blob/master/script.js)
 
 #### Nello stesso file, come già descritto e accennato
 
@@ -140,4 +146,78 @@ console.log("Hello World");
 </html>
 ```
 
-[Esempio 2](https://github.com/pasqualeclarizio83/django/blob/main/start.png)
+[Esempio 2](https://github.com/pasqualeclarizio83/javascript/blob/master/esempio2.html)
+
+#### Un esempio senza interazione che permette di effettuare dei calcoli
+#### Capire e comprendere la funzione.
+#### E' implementata la funzione
+
+```python
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imparare JavaScript</title>
+</head>
+<body>
+
+    <script>
+        // Definiamo una funzione chiamata "calcolaDoppio"
+        function calcolaDoppio(numero) {
+            // Calcola il doppio del numero ricevuto
+            let risultato = numero * 2;
+
+            // Ritorna il risultato
+            return risultato;
+        }
+
+        // Usiamo la funzione
+        let numero = 5; // Numero che vogliamo raddoppiare
+        let doppio = calcolaDoppio(numero); // Chiamiamo la funzione con il numero 5
+
+        // Mostriamo il risultato nella console
+        console.log("Il doppio di " + numero + " è: " + doppio);
+
+    </script>
+
+</body>
+</html>
+```
+
+#### al posto di console.log
+#### possiamo anche mettere ALERT
+
+
+```python
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imparare JavaScript</title>
+</head>
+<body>
+
+    <script>
+        // Definiamo una funzione chiamata "calcolaDoppio"
+        function calcolaDoppio(numero) {
+            // Calcola il doppio del numero ricevuto
+            let risultato = numero * 2;
+
+            // Ritorna il risultato
+            return risultato;
+        }
+
+        // Usiamo la funzione
+        let numero = 5; // Numero che vogliamo raddoppiare
+        let doppio = calcolaDoppio(numero); // Chiamiamo la funzione con il numero 5
+
+        // Mostriamo il risultato nella console
+        alert("Il doppio di " + numero + " è: " + doppio);
+
+    </script>
+
+</body>
+</html>
+```
