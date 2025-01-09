@@ -221,3 +221,100 @@ console.log("Hello World");
 </body>
 </html>
 ```
+
+#### --------------------------------------------------------------------------------------------------
+
+
+### Astrazione
+
+#### L'astrazione è un concetto fondamentale nell'informatica che ci permette di concentrarci sugli aspetti essenziali di un problema, nascondendo i dettagli di implementazione. In JavaScript, l'astrazione è ampiamente utilizzata per creare codice più leggibile, riutilizzabile e mantenibile.
+
+#### In JavaScript, l'astrazione può essere realizzata attraverso:
+
+#### Funzioni: Incapsulano un blocco di codice riutilizzabile, nascondendo i dettagli interni.
+#### Oggetti: Rappresentano entità del mondo reale con proprietà e metodi, astraendo la loro complessità.
+#### Classi: Definiscono modelli per la creazione di oggetti, promuovendo la riutilizzabilità e l'ereditarietà.
+
+
+#### Astrazione funzionale
+
+#### L'astrazione funzionale si concentra sul trattamento delle funzioni come valori di prima classe, ovvero possono essere assegnate a variabili, passate come argomenti ad altre funzioni e restituite come risultato.
+
+
+#### Funzioni come valori
+
+```python
+const saluta = function(nome) {
+    console.log(`Ciao, ${nome}!`);
+};
+
+let salutoPersonalizzato = saluta;
+salutoPersonalizzato('Marco'); // Output: Ciao, Marco!
+```
+
+
+#### Funzioni come argomenti
+
+```python
+function applicaAFoglia(foglia, funzione) {
+    funzione(foglia);
+}
+
+function cambiaColore(foglia) {
+    foglia.colore = 'rosso';
+}
+
+applicaAFoglia({ colore: 'verde' }, cambiaColore);
+```
+
+
+
+#### Funzioni che restituiscono funzioni
+
+```python
+function creaSalutoPersonalizzato(saluto) {
+    return function(nome) {
+        console.log(`${saluto}, ${nome}!`);
+    };
+}
+
+let salutaFormalmente = creaSalutoPersonalizzato('Buongiorno');
+salutaFormalmente('Anna'); // Output: Buongiorno, Anna!
+```
+
+
+
+#### Astrazione funzionale di ordine superiore
+
+#### Le funzioni di ordine superiore sono funzioni che accettano altre funzioni come argomenti o ne restituiscono. Questo permette di creare funzioni più flessibili e riutilizzabili.
+
+#### Map
+
+```python
+const numeri = [1, 2, 3, 4, 5];
+const numeriDoppi = numeri.map(numero => numero * 2);
+console.log(numeriDoppi); // Output: [2, 4, 6, 8, 10]
+```
+
+
+#### Astrazione funzionale di ordine superiore
+
+#### Le funzioni di ordine superiore sono funzioni che accettano altre funzioni come argomenti o ne restituiscono. Questo permette di creare funzioni più flessibili e riutilizzabili.
+
+#### Filter: Filtra gli elementi di un array in base a una condizione.
+
+```python
+const numeriPari = numeri.filter(numero => numero % 2 === 0);
+console.log(numeriPari); // Output: [2, 4]
+```
+
+
+
+
+
+#### Reduce: Riduce un array a un singolo valore, applicando una funzione cumulativa.
+
+```python
+const somma = numeri.reduce((totale, numero) => totale + numero, 0);
+console.log(somma); // Output: 15
+```
